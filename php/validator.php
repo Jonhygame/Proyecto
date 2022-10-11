@@ -1,51 +1,26 @@
 <?php
-/*var_dump ($_GET);
-echo "<br></br>";
-var_dump($_POST);
-echo "<br></br>";
-var_dump($_REQUEST);
-$a;
-$a = 5;
-echo $a;
-$a = "Hola mundo ";
-echo $a;
-$a = 2;
-echo $a . "Holis"."<br></br>".$a;
-echo "<br></br>";
-$conexcion = mysqli_connect("localhost","Jonhy","4/2001/9jJ","empresaservicios");
-if (!$conexcion) {
-    echo "Error: No se pudo conectar a MySQL." . PHP_EOL;
-    echo "errno de depuración: " . mysqli_connect_errno() . PHP_EOL;
-    echo "error de depuración: " . mysqli_connect_error() . PHP_EOL;
-    exit;
-}
-$Query = "SELECT * FROM empresaservicios.usuario where Nombre = '" . $_POST[] . "'";  
-$result = mysqli_query($conexcion, $Query);
+session_start();
 
-while ($row = mysqli_fetch_array($result)) {
-    echo $row['Nombre'];
-    echo ' ';
-    echo $row['Apellido'];
-    echo ' ';
-    echo $row['Genero'];
-    echo "<br></br>";
-}
-function suma($a,$b){
-    return $a + $b;
-}
-echo suma(50.5,50.6);*/
-include "classBaseDeDatos.php";
-$oBD = new baseDatos();
+include "../php/classBaseDeDatos.php";
+$oDB = new baseDatos();
 $cad = "SELECT * FROM Usuario WHERE Email='".$_POST['email']."' AND Pwd='".$_POST['pwd']."';";
 //echo $cad;
 //exit();
 $_POST['pwd']=str_replace("'","",$_POST['pwd']);
 $_POST['email']=str_replace("'","",$_POST['email']);
 
-$oDB -> m_query($cad);
-
+$datosUsuario = $oDB -> m_obtenerRegistro($cad);
 if($oDB->a_numRegistros == '1' ){
-    header("location: ../html/index.php");
+    $_SESSION['email'] = $_POST['email'];
+    $_SESSION['nombUsuario'] = $datosUsuario['Nombre'].' '. $datosUsuario['Apellido'];
+    $cad = "UPDATE Usuario SET fecha_ulti_acceso='".date("Y-m-d")."',Accesos=Accesos+1 WHERE Email='".$_POST['email']."'";
+    $oDB->m_query($cad);
+    if($datosUsuario['id_Rol'] == '1'){
+        header("location: ../html/index.php?");
+        $_SESSION['admin']=true;
+    }else{
+        header("location: ../html/homeUser.php");
+    }
 }else{
     header("location: ../html/login.php?e=1");
 }

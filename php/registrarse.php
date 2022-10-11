@@ -1,63 +1,56 @@
 <?
-//include "classBD.php";
-$conexion=mysqli_connect("localhost","Jonhy","4/2001/9jJ","empresaservicios"); 
+session_start();
+include "classBaseDeDatos.php";
+include "../php/class.phpmailer.php";
+include "../php/class.smtp.php";
+      $operacion;
+      $contra;
+      $cadena="ABCDEFGHIJKLMNPQRSTUVWXYZ123456789123456789";
+      $numeC=strlen($cadena);
+      $nuevPWD="";
+      for ($i=0; $i<8; $i++)
+      $nuevPWD.=$cadena[rand()%$numeC];
 
-$cadena="ABCDEFGHIJKLMNPQRSTUVWXYZ123456789123456789";
-$numeC=strlen($cadena);
-$nuevPWD="";
-for ($i=0; $i<8; $i++)
-  $nuevPWD.=$cadena[rand()%$numeC]; 
-
-$cad="insert into Usuario set Nombre='".$_POST['nombres']."', Apellidos='".$_POST['apellidos']."', Email='".$_POST['email']."', Pwd'".$nuevPWD."',Idrol=1, 
-Fecha_Ulti_Acceso='"date("Y-m-d H:i:s")."'"";
-
-
- include("class.phpmailer.php");
- include("class.smtp.php");
-
-$mail = new PHPMailer();
-$mail->IsSMTP();
-    $mail->Host="smtp.gmail.com"; //mail.google
-    $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
-    $mail->Port = 465;     // set the SMTP port for the GMAIL server
-    $mail->SMTPDebug  = 1;  // enables SMTP debug information (for testing)
+      $mail = new PHPMailer();
+      $mail->IsSMTP();
+      $mail->Host="smtp.gmail.com"; //mail.google
+      $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for GMail
+      $mail->Port = 465;     // set the SMTP port for the GMAIL server
+      $mail->SMTPDebug  = 1;  // enables SMTP debug information (for testing)
                               // 1 = errors and messages
                               // 2 = messages only
-    $mail->SMTPAuth = true;   //enable SMTP authentication
+      $mail->SMTPAuth = true;   //enable SMTP authentication
     
-    $mail->Username =   "contreras.villanuevaus@gmail.com"; // SMTP account username
-    $mail->Password = "egcxzzocduqllzwv";  // SMTP account password
+      $mail->Username =   "contreras.villanuevaus@gmail.com"; // SMTP account username
+      $mail->Password = "cjrulnctaphbokur";  // SMTP account password
       
-    $mail->From="";
-    $mail->FromName="";
-    $mail->Subject = "Registro completo";
-    $mail->MsgHTML("<h1>BIENVENIDO ".$_POST['nombres']." ".$_POST['apellidos']."</h1><h2> tu clave de acceso es : ".$_POST['password']."</h2>");
-    $mail->AddAddress($_POST['correo']);
-    //$mail->AddAddress("admin@admin.com");
-    if (!$mail->Send()) 
+      $mail->From="Empresa";
+      $mail->FromName="";
+      $mail->Subject = "Registro completo";
+      $mail->MsgHTML("<h1>BIENVENIDO ".$_POST['nombres']." ".$_POST['apellidos']."</h1><h2> tu clave de acceso es : ".$nuevPWD."</h2>");
+      $mail->AddAddress($_POST['correo']);
+      $mail->AddAddress("admin@admin.com");
+      if (!$mail->Send()) {
           echo  "Error: " . $mail->ErrorInfo;
-    else { $result=mysqli_query($conexion,$cad);
-           header("location: index.php?e=7"); }
-/*
-
-PROBLEMAS A SOLUCIONAR EN EL REGISTRO
-1) DETECTAR QUE EL CORREO YA ESTA REGISTRADO, 
-   YA QUE ES LA LLAVE PRIMARIA Y NO SE DEBE ENVIAR
-   EL CORREO SI YA ESTABA REGISTRADO.
-2) LA CLAVE DEBE DE CIFRARSE, POR QUE EN EL 
-   LOGUEO SE CIFRA.
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-
+      }else { 
+            $oBD = new baseDatos();
+            if($_POST["accion"]== "Register"){
+                  $cad="INSERT INTO usuario set Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Email='".$_POST['correo']."', Pwd=('".$nuevPWD."'), id_Rol = 2, Fecha_ulti_acceso='".date("Y-m-d")."', Accesos = 0";
+                  $oBD->m_query($cad);
+                  $_SESSION['correo'] = $_POST['correo'];
+                  if($oBD->a_error)
+                       header("location: ../Html/login.php?e=7");
+                     else
+                     header("location: ../Html/login.php?e=3");
+            }else{
+                  $cad="UPDATE usuario set Pwd= password('".$nuevPWD."') where Email='".$_POST['correo']."'";
+                  $oBD->m_query($cad);
+                  $_SESSION['correo'] = $_POST['correo'];
+                  if($oBD->a_error)
+                       header("location: ../Html/login.php?e=11");
+                     else
+                     header("location: ../Html/login.php?e=12");
+                     $_SESSION['correo'] = $_POST['correo'];
+            }
+      }
 ?>
