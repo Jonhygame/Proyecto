@@ -33,7 +33,7 @@ class Users extends baseDatos{
                 <label class="form-label mt-4">Nuevo Usuario</label>
                 <div class="form-group">
                 <div class="input-group mb-3">
-                <span class="input-group-text">Nombew</span>
+                <span class="input-group-text">Nombre</span>
                 <input type="text" class="form-control" name="usuario" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["id_Usuario"] :"").'>
                 </div>
                 </div>
@@ -43,7 +43,10 @@ class Users extends baseDatos{
                 <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4">
-                <button  class="btn btn-info" >'.((isset($registro))? "Actualizar":"Registrar").'</button><input type="hidden" name="accion" value="'.((isset($registro))? "update":"insert").'" />
+                <button  class="btn btn-info" >
+                '.((isset($registro))? "Actualizar":"Registrar").'
+                </button>
+                <input type="hidden" name="accion" value="'.((isset($registro))? "update":"insert").'" />
                 </div>
                 </div>
                 </form>
