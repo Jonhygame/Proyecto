@@ -35,7 +35,7 @@ include "../php/class.smtp.php";
       }else { 
             $oBD = new baseDatos();
             if($_POST["accion"]== "Register"){
-                  $cad="INSERT INTO usuario set Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Email='".$_POST['correo']."', Pwd=('".$nuevPWD."'), id_Rol = 2, Fecha_ulti_acceso='".date("Y-m-d")."', Accesos = 0";
+                  $cad="INSERT INTO usuario set Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Email='".$_POST['correo']."', Pwd=PASSWORD('".$nuevPWD."'), id_Rol = 2, Fecha_ulti_acceso='".date("Y-m-d")."', Accesos = 0, Genero='".(($_POST['Genero']=="F")?"Femenino":"Masculino")."'";
                   $oBD->m_query($cad);
                   $_SESSION['correo'] = $_POST['correo'];
                   if($oBD->a_error)

@@ -52,7 +52,6 @@ class baseDatos {
 
     function m_recuRegistro(){
         return mysqli_fetch_array($this->a_registros);
-        
     }
     function m_crearLista($tabla,$PK,$nombCampo,$ordenarPor){
         $cad = "Select ".$PK.", ".$ordenarPor." from ".$tabla." order by ".$ordenarPor;"";

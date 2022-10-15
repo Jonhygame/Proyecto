@@ -3,10 +3,10 @@ session_start();
 
 include "../php/classBaseDeDatos.php";
 $oDB = new baseDatos();
-$cad = "SELECT * FROM Usuario WHERE Email='".$_POST['email']."' AND Pwd='".$_POST['pwd']."';";
+$cad = "SELECT * FROM Usuario WHERE Email='".$_POST['email']."' AND Pwd = password('".$_POST['pwd']."');";
 //echo $cad;
 //exit();
-$_POST['pwd']=str_replace("'","",$_POST['pwd']);
+//$_POST['pwd']=str_replace("'","",$_POST['pwd']);
 $_POST['email']=str_replace("'","",$_POST['email']);
 
 $datosUsuario = $oDB -> m_obtenerRegistro($cad);

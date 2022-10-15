@@ -6,10 +6,9 @@ class Roles extends baseDatos{
         $html = '';
         switch ($accion){
             case 'insert':
-                $cad="INSERT into rol SET Rol='".$_POST['Rol']."'";
-                $this->m_query($cad);
+                $this->m_query("INSERT into rol SET Rol='".$_POST['Rol']."'");
                 $html = $this->listar();
-                break;
+            break;
             case 'update':
                 $cad = "UPDATE rol SET Rol = '".$_POST['Rol']."' where id_Rol = ".$_POST['id_Rol'];
                 $this->m_query($cad);
@@ -18,7 +17,7 @@ class Roles extends baseDatos{
             case 'delete':
                 $this->m_query("DELETE from rol where id_Rol =".$_POST['id_Rol']);
                 $html = $this->listar();
-                break;
+            break;
             case 'editForm':
                 $registro = $this->m_obtenerRegistro("SELECT * from rol where id_Rol =".$_POST['id_Rol']);
             case 'newForm':
@@ -30,7 +29,7 @@ class Roles extends baseDatos{
                 <div class="col-4"></div>
                 <div class="col-4">
                 <div class="form-group">
-                <label class="form-label mt-4">Nuevo Rol</label>
+                <label class="form-label mt-4">'.((isset($registro))?"Rol":"Nuevo Rol").'</label>
                 <div class="form-group">
                 <div class="input-group mb-3">
                 <span class="input-group-text">Rol</span>
@@ -43,9 +42,8 @@ class Roles extends baseDatos{
                 <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4">
-
-
-                <button  class="btn btn-info" >'.((isset($registro))? "Actualizar":"Registrar").'</button><input type="hidden" name="accion" value="'.((isset($registro))? "update":"insert").'" />
+                <button  class="btn btn-info" >'.((isset($registro))? "Actualizar":"Registrar").'</button>
+                <input type="hidden" name="accion" value="'.((isset($registro))? "update":"insert").'" />
                 </div>
                 </div>
                 </form>

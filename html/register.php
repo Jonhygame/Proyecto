@@ -10,6 +10,29 @@
     <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Ingrese su Apellido" required/>
     <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo" required/>
     <input class="controls" type="text" name="capchat" id="capchat" placeholder="<?=$cadena;?>" required/>
+    <fieldset class="form-group"> 
+      <legend class="mt-4">Genero</legend>
+      <div class="row">
+     <div class="col-4">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="radio" id="Fem" value="F" name="Genero">
+        <label class="form-check-label" for="Fem">Femenino</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="radio" value="M" id="masc" name="Genero">
+        <label class="form-check-label" for="masc">Mascúlino</label>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="radio" value="O" id="otro" name="Genero">
+        <label class="form-check-label" for="otro">Otro</label>
+      </div>
+    </div>
+    </div>
+    </fieldset>
     <input type="hidden" name="accion" value = "Register"/>
     <p>Estoy de acuerdo con <a href="#">Terminos y Condiciones</a></p>
     <input class="botons" type="submit" value="Registrar">

@@ -9,11 +9,18 @@ class Users extends baseDatos{
                 $cad="INSERT into usuario SET usuario='".$_POST['usuario']."'";
                 $this->m_query($cad);
                 $html = $this->listar();
-                break;
+            break;
             case 'update':
                 $cad = "UPDATE usuario SET usuario = '".$_POST['usuario']."' where id_Usuario = ".$_POST['id_Usuario'];
                 $this->m_query($cad);
                 $html=$this->listar();
+            break;
+            case 'updateProfile':
+                if($_FILES['Foto']['name'] != ''){
+                    $extension = explode(".",$_FILES['Foto']['name']);
+                    $extension = $extension[count($extension)-1];
+                    $nomFinal = $_SESSION['id_Usuario'].".".$extension;
+                }
             break;
             case 'delete':
                 $this->m_query("DELETE from usuario where id_Usuario =".$_POST['id_Usuario']);
@@ -34,7 +41,7 @@ class Users extends baseDatos{
                 <div class="form-group">
                 <div class="input-group mb-3">
                 <span class="input-group-text">Nombre</span>
-                <input type="text" class="form-control" name="usuario" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["id_Usuario"] :"").'>
+                <input type="text" class="form-control" name="usuario" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Nombre"] :"").'>
                 </div>
                 </div>
                 </div>
@@ -78,7 +85,7 @@ class Users extends baseDatos{
         <input type="hidden" name="accion" value="newForm">
         <input type="image" width = "35 px" src="../img/agregar.png">
         </form>
-        </td><th>Id</th><td/>Nombre</th><td>Apellidos</td><td>Email</td><td>Fecha de ultimo acceso</td><td>Accesos</td><td>Genero</td><td>Rol</td>
+        </td><th>Id</th><td/>Nombre Completo<td>Email</td><td>Fecha de ultimo acceso</td><td>Accesos</td><td>Genero</td><td>Rol</td>
         </tr>';
         //Fin de cabezera
         $this->m_query("SELECT * from usuario order by id_usuario");
@@ -100,8 +107,7 @@ class Users extends baseDatos{
             </form>
             </td>
             <td>'.$tupla["id_Usuario"].'</td>
-            <td>'.$tupla["Nombre"].'</td>
-            <td>'.$tupla['Apellido'].'</td>
+            <td>'.$tupla["Nombre"].' '.$tupla['Apellido'].'</td>
             <td>'.$tupla['Email'].'</td>
             <td>'.$tupla['Fecha_ulti_acceso'].'</td>
             <td>'.$tupla['Accesos'].'</td>
