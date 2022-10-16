@@ -13,7 +13,7 @@ class Users extends baseDatos{
                 $html = $this->listar();
             break;
             case 'update':
-                $cad = "UPDATE usuario SET usuario = '".$_POST['usuario']."' where id_Usuario = ".$_POST['id_Usuario'];
+                $cad = "UPDATE usuario SET Nombre = '".$_POST['usuario']."' where id_Usuario = ".$_POST['id_Usuario'];
                 $this->m_query($cad);
                 $html=$this->listar();
             break;
@@ -37,18 +37,103 @@ class Users extends baseDatos{
                 $html.='<input type="hidden" name="id_Usuario" value="'.$_POST['id_Usuario'].'" />';
                 $html.='<div class="row">
                 <div class="col-4"></div>
-                <div class="col-4">
-                <div class="form-group">
-                <label class="form-label mt-4">Nuevo Usuario</label>
-                <div class="form-group">
-                <div class="input-group mb-3">
-                <span class="input-group-text">Nombre</span>
-                <input type="text" class="form-control" name="usuario" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Nombre"] :"").'>
-                </div>
-                </div>
-                </div>
-                </div>
-                </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label class="form-label mt-4">Nuevo Usuario</label>
+                                <div class="form-group">
+                                    <div class="input-group mb-3">
+                                    <span class="input-group-text">Nombre</span>
+                                    <input type="text" class="form-control" name="usuario" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Nombre"] :"").'>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="input-group mb-3">
+                                    <span class="input-group-text">Apellidos</span>
+                                    <input type="text" class="form-control" name="apellidos" placeholder="Apellido del usuario" value="'.((isset($registro))?$registro['Apellido']:"").'">
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="input-group mb-3">
+                                    <span class="input-group-text">Email</span>
+                                    <input type="text" class="form-control" name="usuario" placeholder="Email" value="'.((isset($registro))?$registro['Email']:"").'">
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="input-group mb-3">
+                                    <span class="input-group-text">Password</span>
+                                    <input type="text" class="form-control" name="usuario" placeholder="Contraseña" value="">
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="input-group mb-3">
+                                    <span class="input-group-text">Fecha del ultimo acceso</span>
+                                    <input type="date" class="form-control" name="usuario" placeholder="Nombre del Usuario" value="'.((isset($registro))?$registro['Fecha_ulti_acceso']:"").'">
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="input-group mb-3">
+                                    <span class="input-group-text">Accesos</span>
+                                    <input type="text" class="form-control" name="usuario" placeholder="Nombre del Usuario" value="'.((isset($registro))?$registro['Accesos']:"").'">
+                                    </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                    <div class="input-group mb-3">
+                                    <fieldset class="form-group"> 
+                                    <legend class="mt-4">Genero</legend>
+                                    <div class="row">
+                                    <div class="col-4">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" id="Fem" value="F" name="Genero" '.(($registro['Genero']=='Femenino')?"checked":"").'>
+                                        <label class="form-check-label" for="Fem">Femenino</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-4">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" value="M" id="masc" name="Genero" '.(($registro['Genero']=='Masculino')?"checked":"").'>
+                                        <label class="form-check-label" for="masc">Mascúlino</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-4">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" value="O" id="otro" name="Genero" '.(($registro['Genero']=='Otro')?"checked":"").'>
+                                        <label class="form-check-label" for="otro">Otro</label>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </fieldset>
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class="input-group mb-3">
+                                    <fieldset class="form-group"> 
+                                    <legend class="mt-4">Genero</legend>
+                                    <div class="row">
+                                    <div class="col-4">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" id="Fem" value="F" name="Genero" >
+                                        <label class="form-check-label" for="Fem">Femenino</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-4">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" value="M" id="masc" name="Genero">
+                                        <label class="form-check-label" for="masc">Mascúlino</label>
+                                    </div>
+                                    </div>
+                                    <div class="col-4">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="radio" value="O" id="otro" name="Genero">
+                                        <label class="form-check-label" for="otro">Otro</label>
+                                    </div>
+                                    </div>
+                                    </div>
+                                    </fieldset>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
                 <div class="row">
                 <div class="col-4"></div>
                 <div class="col-4">
