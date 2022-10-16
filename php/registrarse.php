@@ -3,7 +3,6 @@ session_start();
 include "classBaseDeDatos.php";
 include "../php/class.phpmailer.php";
 include "../php/class.smtp.php";
-      $operacion;
       $contra;
       $cadena="ABCDEFGHIJKLMNPQRSTUVWXYZ123456789123456789";
       $numeC=strlen($cadena);
@@ -35,22 +34,30 @@ include "../php/class.smtp.php";
       }else { 
             $oBD = new baseDatos();
             if($_POST["accion"]== "Register"){
-                  $cad="INSERT INTO usuario set Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Email='".$_POST['correo']."', Pwd=PASSWORD('".$nuevPWD."'), id_Rol = 2, Fecha_ulti_acceso='".date("Y-m-d")."', Accesos = 0, Genero='".(($_POST['Genero']=="F")?"Femenino":"Masculino")."'";
-                  $oBD->m_query($cad);
-                  $_SESSION['correo'] = $_POST['correo'];
-                  if($oBD->a_error)
-                       header("location: ../Html/login.php?e=7");
-                     else
-                     header("location: ../Html/login.php?e=3");
+                  if($_POST['capchat'] == $_SESSION['captcha']){
+                        $cad="INSERT INTO usuario set Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Email='".$_POST['correo']."', Pwd=PASSWORD('".$nuevPWD."'), id_Rol = 2, Fecha_ulti_acceso='".date("Y-m-d")."', Accesos = 0, Genero='".(($_POST['Genero']=="F")?"Femenino":"Masculino")."'";
+                        $oBD->m_query($cad);
+                        $_SESSION['correo'] = $_POST['correo'];
+                        if($oBD->a_error)
+                              header("location: ../Html/login.php?e=7");
+                        else
+                              header("location: ../Html/login.php?e=3");
+                  }else{
+                        header("location: ../Html/register.php?e=1");
+                  }
             }else{
-                  $cad="UPDATE usuario set Pwd= password('".$nuevPWD."') where Email='".$_POST['correo']."'";
-                  $oBD->m_query($cad);
-                  $_SESSION['correo'] = $_POST['correo'];
-                  if($oBD->a_error)
-                       header("location: ../Html/login.php?e=11");
-                     else
-                     header("location: ../Html/login.php?e=12");
-                     $_SESSION['correo'] = $_POST['correo'];
+                  if($_POST['capchat'] == $_SESSION['captcha']){
+                        $cad="UPDATE usuario set Pwd= password('".$nuevPWD."') where Email='".$_POST['correo']."'";
+                        $oBD->m_query($cad);
+                        $_SESSION['correo'] = $_POST['correo'];
+                        if($oBD->a_error)
+                              header("location: ../Html/login.php?e=11");
+                        else
+                              header("location: ../Html/login.php?e=12");
+                        $_SESSION['correo'] = $_POST['correo'];
+                  }else{
+                        header("location: ../Html/password.php?e=70");
+                  }
             }
       }
 ?>

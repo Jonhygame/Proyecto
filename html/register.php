@@ -1,7 +1,17 @@
   <?php
+  session_start();
   include "../php/funciones.php";
   $cadena=captcha();
   include "../html/barra.php";
+  if(isset($_GET['e'])) {
+    echo '<div class="conntainer">
+    <div class="alert alert-danger" role="alert">
+    <div class="col-4">';
+    if($_GET['e']==1){
+      echo 'captcha incorrecto';
+    }
+    echo'</div></div></div>';
+  }
   ?>
   <section class="form-register">
     <form action="../php/registrarse.php" method="POST">

@@ -80,9 +80,8 @@ class Roles extends baseDatos{
             <input type="hidden" name="id_Rol" value = "'.$tupla["id_Rol"].'"/>
             <input type="image" width = "35 px" src="../img/edit.png">
             </form>
-
             </td>
-
+            
             <td>
             <form method="post">
             <input type="hidden" name="accion" value = "delete"/>

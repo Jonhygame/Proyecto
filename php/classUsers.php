@@ -6,7 +6,9 @@ class Users extends baseDatos{
         $html = '';
         switch ($accion){
             case 'insert':
-                $cad="INSERT into usuario SET usuario='".$_POST['usuario']."'";
+                $cad="INSERT INTO usuario set Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Email='".$_POST['correo']."', Pwd=PASSWORD('".$nuevPWD."'), id_Rol = 2, Fecha_ulti_acceso='".date("Y-m-d")."', Accesos = 0, Genero='".(($_POST['Genero']=="F")?"Femenino":"Masculino")."'";$cad="INSERT into usuario SET usuario='".$_POST['usuario']."'";
+                echo $cad;
+                exit();
                 $this->m_query($cad);
                 $html = $this->listar();
             break;
