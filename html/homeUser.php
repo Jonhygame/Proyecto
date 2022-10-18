@@ -52,65 +52,27 @@ include "barraUser.php";
 		</div>
 	</div>
 	<div class="row">
+<?php
+include "../php/classServicios.php";
+$oServicios->m_Query("Select * from servicios Order by Nombre;");
+foreach($oServicios->a_registros as $registro){
+?>
+	
 		<div class="col-md-3">
 			<div class="card">
 				<h5 class="card-header">
-					Card title
+					<?=$registro['Nombre']?>
 				</h5>
 				<div class="card-body">
 					<p class="card-text">
-						Card content
+						<?=$registro['Descripcion']?>
 					</p>
 				</div>
 				<div class="card-footer">
-					Card footer
+					<?=$registro['Precio']?>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<h5 class="card-header">
-					Card title
-				</h5>
-				<div class="card-body">
-					<p class="card-text">
-						Card content
-					</p>
-				</div>
-				<div class="card-footer">
-					Card footer
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<h5 class="card-header">
-					Card title
-				</h5>
-				<div class="card-body">
-					<p class="card-text">
-						Card content
-					</p>
-				</div>
-				<div class="card-footer">
-					Card footer
-				</div>
-			</div>
-		</div>
-		<div class="col-md-3">
-			<div class="card">
-				<h5 class="card-header">
-					Card title
-				</h5>
-				<div class="card-body">
-					<p class="card-text">
-						Card content
-					</p>
-				</div>
-				<div class="card-footer">
-					Card footer
-				</div>
-			</div>
-		</div>
+<? } ?>
 	</div>
 </div>

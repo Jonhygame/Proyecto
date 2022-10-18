@@ -1,7 +1,7 @@
 <?php
 include "../php/classBaseDeDatos.php";
 
-class Users extends baseDatos{
+class Servicios extends baseDatos{
     function ejecuta($accion){
         $html = '';
         switch ($accion){
@@ -14,13 +14,6 @@ class Users extends baseDatos{
                 $cad = "UPDATE usuario SET Nombre = '".$_POST['usuario']."' where id_Usuario = ".$_POST['id_Usuario'];
                 $this->m_query($cad);
                 $html=$this->listar();
-            break;
-            case 'updateProfile':
-                if($_FILES['Foto']['name'] != ''){
-                    $extension = explode(".",$_FILES['Foto']['name']);
-                    $extension = $extension[count($extension)-1];
-                    $nomFinal = $_SESSION['id_Usuario'].".".$extension;
-                }
             break;
             case 'delete':
                 $this->m_query("DELETE from usuario where id_Usuario =".$_POST['id_Usuario']);
@@ -141,85 +134,6 @@ class Users extends baseDatos{
             case 'list':
                 $html = $this->listar();
             break;
-            case 'viewProfile':
-                $registro = $this->m_obtenerRegistro("SELECT * from usuario where id_Usuario =".$_SESSION['id_Usuario']);
-                $html.='<div class="container">
-                <form method="post">';
-                if (isset($registro))
-                $html.='<input type="hidden" name="id_Usuario" value="'.$_SESSION['id_Usuario'].'" />';
-                $html.='<div class="row">
-                <div class="col-4">
-                    </div>
-                        <div class="col-4">
-                        <div class="form-group">
-                                <label class="form-label mt-4">Editar Perfil</label>
-                                    <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Nombre</span>
-                                <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Foto"] :"").'>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Nombre</span>
-                                    <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Nombre"] :"").'>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Apellidos</span>
-                                    <input type="text" class="form-control" name="apellidos" placeholder="Apellido del usuario" value="'.((isset($registro))?$registro['Apellido']:"").'">
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Password</span>
-                                    <input type="text" class="form-control" name="pwd" placeholder="Contraseña" value="">
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <fieldset class="form-group"> 
-                                    <legend class="mt-4">Genero</legend>
-                                    <div class="row">
-                                    <div class="col-4">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" id="Fem" value="F" name="Genero" '.((isset($registro))?(($registro['Genero']=='Femenino')?"checked":""):"").'>
-                                        <label class="form-check-label" for="Fem">Femenino</label>
-                                    </div>
-                                    </div>
-                                    <div class="col-4">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" value="M" id="masc" name="Genero" '.((isset($registro))?(($registro['Genero']=='Masculino')?"checked":""):"").'>
-                                        <label class="form-check-label" for="masc">Mascúlino</label>
-                                    </div>
-                                    </div>
-                                    <div class="col-4">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" value="Otro" id="O" name="Genero" '.((isset($registro))?(($registro['Genero']=='Otro')?"checked":""):"").'>
-                                        <label class="form-check-label" for="otro">Otro</label>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </fieldset>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                <div class="row">
-                <div class="col-4"></div>
-                <div class="col-4">
-                <button  class="btn btn-info" >Actualizar</button>
-                <input type="hidden" name="accion" value="updateProfile" />
-                </div>
-                </div>
-                </form>
-                </div>';
-                break;
-            break;
             default:
                 $html.= $_REQUEST['accion']." Accion no programada";
             break;
@@ -269,5 +183,5 @@ class Users extends baseDatos{
     }
 }
 
-$oUsers = new Users();
+$oServicios = new Servicios();
 ?>
