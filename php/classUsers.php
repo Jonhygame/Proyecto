@@ -1,5 +1,4 @@
 <?php
-session_start();
 include "../php/classBaseDeDatos.php";
 
 class Users extends baseDatos{
@@ -143,112 +142,7 @@ class Users extends baseDatos{
                 $html = $this->listar();
             break;
             case 'viewProfile':
-                $registro = $this->m_obtenerRegistro("SELECT * from usuario where id_Usuario =".$_SESSION['id_Usuario']);
-                $html.='<div class="container">
-                <form method="post">';
-                if (isset($registro))
-                $html.='<input type="hidden" name="id_Usuario" value="'.$_POST['id_Usuario'].'" />';
-                $html.='<div class="row">
-                <div class="col-4"></div>
-                    <div class="col-4">
-                        <div class="form-group">
-                            <label class="form-label mt-4">Nuevo Usuario</label>
-                                <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Nombre</span>
-                                    <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value=''>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Apellidos</span>
-                                    <input type="text" class="form-control" name="apellidos" placeholder="Apellido del usuario" value="">
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Email</span>
-                                    <input type="text" class="form-control" name="correo" placeholder="Email" value="">
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Password</span>
-                                    <input type="text" class="form-control" name="pwd" placeholder="Contraseña" value="">
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Fecha del ultimo acceso</span>
-                                    <input type="date" class="form-control" name="Fecha_Ulti_Acceso" placeholder="Fecha del ultimo acceso" value="">
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Accesos</span>
-                                    <input type="text" class="form-control" name="Accesos" placeholder="Cuantos accesos tiene" value="">
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <fieldset class="form-group"> 
-                                    <legend class="mt-4">Genero</legend>
-                                    <div class="row">
-                                    <div class="col-4">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" id="Fem" value="F" name="Genero">
-                                        <label class="form-check-label" for="Fem">Femenino</label>
-                                    </div>
-                                    </div>
-                                    <div class="col-4">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" value="M" id="masc" name="Genero">
-                                        <label class="form-check-label" for="masc">Mascúlino</label>
-                                    </div>
-                                    </div>
-                                    <div class="col-4">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" value="Otro" id="O" name="Genero">
-                                        <label class="form-check-label" for="otro">Otro</label>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </fieldset>
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <fieldset class="form-group"> 
-                                    <legend class="mt-4">Rol</legend>
-                                    <div class="row">
-                                    <div class="col-6">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" id="Rol" value="1" name="Rol" >
-                                        <label class="form-check-label" for="Fem">Administrador</label>
-                                    </div>
-                                    </div>
-                                    <div class="col-6">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" value="2" id="Rol" name="Rol" >
-                                        <label class="form-check-label" for="masc">Usuario</label>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </fieldset>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                <div class="row">
-                <div class="col-4"></div>
-                <div class="col-4">
-                <button  class="btn btn-info">Actualizar</button>
-                <input type="hidden" name="accion" value="update"/>
-                </div>
-                </div>
-                </form>
-                </div>';
+                echo "Hola";
             break;
             default:
                 $html.= $_REQUEST['accion']." Accion no programada";
