@@ -4,7 +4,6 @@ include "../php/classUsers.php";
 $oUsers=new Users();
 if(isset($_REQUEST["accion"])){
     $oUsers->ejecuta($_REQUEST['accion']);
-    echo $oUsers->ejecuta($_REQUEST["accion"]);
 }else{
     echo $oUsers->ejecuta("viewProfile");
 }

@@ -6,7 +6,7 @@ class Servicios extends baseDatos{
         $html = '';
         switch ($accion){
             case 'insert':
-                $cad="INSERT INTO usuario set Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Email='".$_POST['correo']."', Pwd=PASSWORD('".$_POST['pwd']."'), id_Rol ='".$_POST['Rol']."', Fecha_ulti_acceso='".$_POST['Fecha_Ulti_Acceso']."', Accesos = '".$_POST['Accesos']."', Genero='".(($_POST['Genero']=="F")?"Femenino":(($_POST['Genero']=="M")?"Masculino":"Otro"))."'";
+                $cad="INSERT INTO servicios set Nombre='".."'";
                 $this->m_query($cad);
                 $html = $this->listar();
             break;
@@ -149,34 +149,33 @@ class Servicios extends baseDatos{
         <input type="hidden" name="accion" value="newForm">
         <input type="image" width = "35 px" src="../img/agregar.png">
         </form>
-        </td><th>Id</th><td/>Nombre Completo<td>Email</td><td>Fecha de ultimo acceso</td><td>Accesos</td><td>Genero</td><td>Rol</td>
+        </td>
+        <th>Id</th><td/>Nombre Servicio<td>Precio</td><td>Descripcion</td>
         </tr>';
         //Fin de cabezera
-        $this->m_query("SELECT * from usuario order by id_usuario");
+        $this->m_query("SELECT * from servicios");
         for($i = 0; $i < $this->a_numRegistros; $i++){
             $tupla = $this->m_recuRegistro();
             $res.='<tr class="table-dark">
             <td>
             <form method="post">
             <input type="hidden" name="accion" value = "editForm"/>
-            <input type="hidden" name="id_Usuario" value = "'.$tupla["id_Usuario"].'"/>
+            <input type="hidden" name="id_Servicio" value = "'.$tupla["id_Servicio"].'"/>
             <input type="image" width = "35 px" src="../img/edit.png">
             </form>
             </td>
             <td>
             <form method="post">
             <input type="hidden" name="accion" value = "delete"/>
-            <input type="hidden" name="id_Usuario" value ="'.$tupla["id_Usuario"].'"/>
+            <input type="hidden" name="id_Servicio" value ="'.$tupla["id_Servicio"].'"/>
             <input type="image" width="35px" src="../img/basura.png"/>
             </form>
             </td>
-            <td>'.$tupla["id_Usuario"].'</td>
-            <td>'.$tupla["Nombre"].' '.$tupla['Apellido'].'</td>
-            <td>'.$tupla['Email'].'</td>
-            <td>'.$tupla['Fecha_ulti_acceso'].'</td>
-            <td>'.$tupla['Accesos'].'</td>
-            <td>'.$tupla['Genero'].'</td>
-            <td>'.(($tupla['id_Rol']=='1')?"Administrador":"Usuario").'</td>
+            <td>'.$tupla["id_Servicio"].'</td>
+            <td>'.$tupla["Nombre"].'</td>
+            <td>'.$tupla['Precio'].'</td>
+            <td>'.$tupla['Descripcion'].'</td>
+            <td>'.$tupla['Imagen'].'</td>
             </tr>';
         }
         return $res.'</table></div></div>';

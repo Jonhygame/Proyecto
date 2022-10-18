@@ -2,7 +2,6 @@
 include "../html/barraAdmin.php";
 include "../php/classUsers.php";
 if(isset($_REQUEST['accion'])){
-    $oUsers->ejecuta($_REQUEST['accion']);
     echo $oUsers->ejecuta($_REQUEST["accion"]);
 }else{
     echo $oUsers->ejecuta("list");

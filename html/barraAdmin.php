@@ -38,6 +38,11 @@ if(!isset($_SESSION['email'])){
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link active" href="../vistas/servicios.php">Servicios
+                  <span class="visually-hidden">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="../html/login.php">Sesion</a>
               </li>
               <li class="nav-item">
