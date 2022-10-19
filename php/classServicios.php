@@ -6,7 +6,7 @@ class Servicios extends baseDatos{
         $html = '';
         switch ($accion){
             case 'insert':
-                $cad="INSERT INTO servicios set Nombre='".."'";
+                $cad="INSERT INTO servicios set id_Usuario='".$_SESSION['id_Usuario']."'";
                 $this->m_query($cad);
                 $html = $this->listar();
             break;
