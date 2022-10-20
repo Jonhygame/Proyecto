@@ -62,61 +62,6 @@ class Servicios extends baseDatos{
                                     <input type="date" class="form-control" name="Fecha_Ulti_Acceso" placeholder="Fecha del ultimo acceso" value="'.((isset($registro))?$registro['Fecha_ulti_acceso']:"").'">
                                     </div>
                             </div>'.((isset($registro))?"":"").'
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Accesos</span>
-                                    <input type="text" class="form-control" name="Accesos" placeholder="Cuantos accesos tiene" value="'.((isset($registro))?$registro['Accesos']:"").'">
-                                    </div>
-                            </div>
-                            
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <fieldset class="form-group"> 
-                                    <legend class="mt-4">Genero</legend>
-                                    <div class="row">
-                                    <div class="col-4">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" id="Fem" value="F" name="Genero" '.((isset($registro))?(($registro['Genero']=='Femenino')?"checked":""):"").'>
-                                        <label class="form-check-label" for="Fem">Femenino</label>
-                                    </div>
-                                    </div>
-                                    <div class="col-4">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" value="M" id="masc" name="Genero" '.((isset($registro))?(($registro['Genero']=='Masculino')?"checked":""):"").'>
-                                        <label class="form-check-label" for="masc">Mascúlino</label>
-                                    </div>
-                                    </div>
-                                    <div class="col-4">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" value="Otro" id="O" name="Genero" '.((isset($registro))?(($registro['Genero']=='Otro')?"checked":""):"").'>
-                                        <label class="form-check-label" for="otro">Otro</label>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </fieldset>
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <fieldset class="form-group"> 
-                                    <legend class="mt-4">Rol</legend>
-                                    <div class="row">
-                                    <div class="col-6">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" id="Rol" value="1" name="Rol" '.((isset($registro))?(($registro['id_Rol']=='1')?"checked":""):"").'>
-                                        <label class="form-check-label" for="Fem">Administrador</label>
-                                    </div>
-                                    </div>
-                                    <div class="col-6">
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" value="2" id="Rol" name="Rol" '.((isset($registro))?(($registro['id_Rol']=='2')?"checked":""):"").'>
-                                        <label class="form-check-label" for="masc">Usuario</label>
-                                    </div>
-                                    </div>
-                                    </div>
-                                    </fieldset>
-                                    </div>
-                            </div>
                         </div>
                     </div>
                 <div class="row">

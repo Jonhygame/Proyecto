@@ -155,8 +155,8 @@ class Users extends baseDatos{
                                 <label class="form-label mt-4">Editar Perfil</label>
                                     <div class="form-group">
                                     <div class="input-group mb-3">
-                                    <span class="input-group-text">Nombre</span>
-                                <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Foto"] :"").'>
+                                    <span class="input-group-text">Foto</span>
+                                    <input type="file" accept=".jpg,.png,.jpeg,.gif " class="form-control" name="Foto" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Foto"] :"").'>
                                     </div>
                                 </div>
                             </div>
