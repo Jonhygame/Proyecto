@@ -3,23 +3,31 @@ include "../php/classBaseDeDatos.php";
 
 class Users extends baseDatos{
     function ejecuta($accion){
+        $rutaImagen = "../img/fotos/";
         $html = '';
         switch ($accion){
             case 'insert':
-                $cad="INSERT INTO usuario set Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Email='".$_POST['correo']."', Pwd=PASSWORD('".$_POST['pwd']."'), id_Rol ='".$_POST['Rol']."', Fecha_ulti_acceso='".$_POST['Fecha_Ulti_Acceso']."', Accesos = '".$_POST['Accesos']."', Genero='".(($_POST['Genero']=="F")?"Femenino":(($_POST['Genero']=="M")?"Masculino":"Otro"))."'";
+                $cad="INSERT INTO usuario set Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Email='".$_POST['correo']."', Pwd=PASSWORD('".$_POST['pwd']."'), id_Rol ='".$_POST['Rol']."', Fecha_ulti_acceso='".$_POST['Fecha_Ulti_Acceso']."', Accesos = '".$_POST['Accesos']."', Genero='".(($_POST['Genero']=="F")?"Femenino":(($_POST['Genero']=="M")?"Masculino":"Otro"))."', Foto=''";
                 $this->m_query($cad);
                 $html = $this->listar();
             break;
             case 'update':
-                $cad = "UPDATE usuario SET Nombre = '".$_POST['usuario']."' where id_Usuario = ".$_POST['id_Usuario'];
+                $cad = "UPDATE usuario SET Nombre = '".$_POST['nombres']."' where id_Usuario = ".$_POST['id_Usuario'];
                 $this->m_query($cad);
                 $html=$this->listar();
             break;
             case 'updateProfile':
-                if($_FILES['Foto']['name'] != ''){
+                if($_POST['pwd']==""){
+                    echo "Escribe tu contraseña porque si no no se puede actualizar";
+                }else{
+                    if($_FILES['Foto']['name'] != ''){
                     $extension = explode(".",$_FILES['Foto']['name']);
                     $extension = $extension[count($extension)-1];
                     $nomFinal = $_SESSION['id_Usuario'].".".$extension;
+                    move_uploaded_file($_FILES['Foto']['tmp_name'],$rutaImagen.$nomFinal);
+                    $cad = "UPDATE usuario set Foto = '".$nomFinal."', Nombre='".$_POST['nombres']."', Apellido='".$_post['apellidos']."', Pwd=PASSWORD('".$POST['pwd']."'), Genero='".(($_POST['Genero']=="F")?"Femenino":(($_POST['Genero']=="M")?"Masculino":"Otro"))."' where id_Usuario = ".$_SESSION['id_Usuario'];
+                    $this->m_query($cad);
+                }
                 }
             break;
             case 'delete':
@@ -41,7 +49,7 @@ class Users extends baseDatos{
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                     <span class="input-group-text">Nombre</span>
-                                    <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Nombre"] :"").'>
+                                    <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value="'.((isset($registro))? $registro["Nombre"] :"").'">
                                     </div>
                                 </div>
                             </div>
@@ -144,7 +152,7 @@ class Users extends baseDatos{
             case 'viewProfile':
                 $registro = $this->m_obtenerRegistro("SELECT * from usuario where id_Usuario =".$_SESSION['id_Usuario']);
                 $html.='<div class="container">
-                <form method="post">';
+                <form method="post" enctype="multipart/form-data">';
                 if (isset($registro))
                 $html.='<input type="hidden" name="id_Usuario" value="'.$_SESSION['id_Usuario'].'" />';
                 $html.='<div class="row">
@@ -155,8 +163,8 @@ class Users extends baseDatos{
                                 <label class="form-label mt-4">Editar Perfil</label>
                                     <div class="form-group">
                                     <div class="input-group mb-3">
-                                    <span class="input-group-text">Foto</span>
                                     <input type="file" accept=".jpg,.png,.jpeg,.gif " class="form-control" name="Foto" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Foto"] :"").'>
+                                    <img src="'.(($registro["Foto"]!=="")?$rutaImagen.$registro["Foto"]:$rutaImagen."user.png").'" alt="" height = "36 px" class="Foto"/>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +172,7 @@ class Users extends baseDatos{
                                     <div class="form-group">
                                     <div class="input-group mb-3">
                                     <span class="input-group-text">Nombre</span>
-                                    <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Nombre"] :"").'>
+                                    <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value="'.((isset($registro))? $registro["Nombre"] :"").'">
                                     </div>
                                 </div>
                             </div>
