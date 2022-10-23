@@ -12,7 +12,7 @@ class Users extends baseDatos{
                 $html = $this->listar();
             break;
             case 'update':
-                $cad = "UPDATE usuario SET Nombre = '".$_POST['nombres']."' where id_Usuario = ".$_POST['id_Usuario'];
+                $cad = "UPDATE usuario SET Nombre = '".$_POST['nombres']."', Apellido='".($_POST['apellidos'])."', Email,'".$_POST['correo']."', Pwd = PASSWORD('".$_POST['pwd']."'), id_Rol='".$_POST[ 'Rol']."' where id_Usuario = ".$_POST['id_Usuario'];
                 $this->m_query($cad);
                 $html=$this->listar();
             break;
@@ -49,41 +49,40 @@ class Users extends baseDatos{
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                     <span class="input-group-text">Nombre</span>
-                                    <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value="'.((isset($registro))? $registro["Nombre"] :"").'">
+                                    <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value="'.((isset($registro))? $registro["Nombre"] :"").'" required>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                     <div class="input-group mb-3">
                                     <span class="input-group-text">Apellidos</span>
-                                    <input type="text" class="form-control" name="apellidos" placeholder="Apellido del usuario" value="'.((isset($registro))?$registro['Apellido']:"").'">
+                                    <input type="text" class="form-control" name="apellidos" placeholder="Apellido del usuario" value="'.((isset($registro))?$registro['Apellido']:"").'" required>
                                     </div>
                             </div>
                             <div class="form-group">
                                     <div class="input-group mb-3">
                                     <span class="input-group-text">Email</span>
-                                    <input type="text" class="form-control" name="correo" placeholder="Email" value="'.((isset($registro))?$registro['Email']:"").'">
+                                    <input type="text" class="form-control" name="correo" placeholder="Email" value="'.((isset($registro))?$registro['Email']:"").'" required>
                                     </div>
                             </div>
                             <div class="form-group">
                                     <div class="input-group mb-3">
                                     <span class="input-group-text">Password</span>
-                                    <input type="text" class="form-control" name="pwd" placeholder="Contraseña" value="">
+                                    <input type="text" class="form-control" name="pwd" placeholder="Contraseña" value="" required>
                                     </div>
                             </div>
                             <div class="form-group">
                                     <div class="input-group mb-3">
                                     <span class="input-group-text">Fecha del ultimo acceso</span>
-                                    <input type="date" class="form-control" name="Fecha_Ulti_Acceso" placeholder="Fecha del ultimo acceso" value="'.((isset($registro))?$registro['Fecha_ulti_acceso']:"").'">
+                                    <input type="date" class="form-control" name="Fecha_Ulti_Acceso" placeholder="Fecha del ultimo acceso" value="'.((isset($registro))?$registro['Fecha_ulti_acceso']:date("Y-m-d")).'" '.((isset($registro))?"disabled":"").' required>
                                     </div>
                             </div>'.((isset($registro))?"":"").'
                             <div class="form-group">
                                     <div class="input-group mb-3">
                                     <span class="input-group-text">Accesos</span>
-                                    <input type="text" class="form-control" name="Accesos" placeholder="Cuantos accesos tiene" value="'.((isset($registro))?$registro['Accesos']:"").'">
+                                    <input type="text" class="form-control" name="Accesos" placeholder="Cuantos accesos tiene" value="'.((isset($registro))?$registro['Accesos']:"").'" '.((isset($registro))?"disabled":"").' required>
                                     </div>
                             </div>
-                            
                             <div class="form-group">
                                     <div class="input-group mb-3">
                                     <fieldset class="form-group"> 
@@ -91,19 +90,19 @@ class Users extends baseDatos{
                                     <div class="row">
                                     <div class="col-4">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" id="Fem" value="F" name="Genero" '.((isset($registro))?(($registro['Genero']=='Femenino')?"checked":""):"").'>
-                                        <label class="form-check-label" for="Fem">Femenino</label>
+                                        <input class="form-check-input" type="radio" id="Fem" value="F" name="Genero" '.((isset($registro))?(($registro['Genero']=='Femenino')?"checked":""):"").' required>
+                                        <label class="form-check-label" for="Fem">Femenino</label >
                                     </div>
                                     </div>
                                     <div class="col-4">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" value="M" id="masc" name="Genero" '.((isset($registro))?(($registro['Genero']=='Masculino')?"checked":""):"").'>
+                                        <input class="form-check-input" type="radio" value="M" id="masc" name="Genero" '.((isset($registro))?(($registro['Genero']=='Masculino')?"checked":""):"").' required>
                                         <label class="form-check-label" for="masc">Mascúlino</label>
                                     </div>
                                     </div>
                                     <div class="col-4">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" value="Otro" id="O" name="Genero" '.((isset($registro))?(($registro['Genero']=='Otro')?"checked":""):"").'>
+                                        <input class="form-check-input" type="radio" value="Otro" id="O" name="Genero" '.((isset($registro))?(($registro['Genero']=='Otro')?"checked":""):"").' required>
                                         <label class="form-check-label" for="otro">Otro</label>
                                     </div>
                                     </div>
@@ -118,13 +117,13 @@ class Users extends baseDatos{
                                     <div class="row">
                                     <div class="col-6">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" id="Rol" value="1" name="Rol" '.((isset($registro))?(($registro['id_Rol']=='1')?"checked":""):"").'>
+                                        <input class="form-check-input" type="radio" id="Rol" value="1" name="Rol" '.((isset($registro))?(($registro['id_Rol']=='1')?"checked":""):"").' required>
                                         <label class="form-check-label" for="Fem">Administrador</label>
                                     </div>
                                     </div>
                                     <div class="col-6">
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="radio" value="2" id="Rol" name="Rol" '.((isset($registro))?(($registro['id_Rol']=='2')?"checked":""):"").'>
+                                        <input class="form-check-input" type="radio" value="2" id="Rol" name="Rol" '.((isset($registro))?(($registro['id_Rol']=='2')?"checked":""):"").' required>
                                         <label class="form-check-label" for="masc">Usuario</label>
                                     </div>
                                     </div>
