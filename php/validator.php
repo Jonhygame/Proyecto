@@ -14,6 +14,7 @@ if($oDB->a_numRegistros == '1' ){
     $_SESSION['email'] = $_POST['email'];
     $_SESSION['nombUsuario'] = $datosUsuario['Nombre'].' '. $datosUsuario['Apellido'];
     $_SESSION['id_Usuario'] = $datosUsuario['id_Usuario'];
+    $_SESSION['Foto'] = $datosUsuario['Foto'];
     $cad = "UPDATE Usuario SET fecha_ulti_acceso='".date("Y-m-d")."',Accesos=Accesos+1 WHERE Email='".$_POST['email']."'";
     $oDB->m_query($cad);
     if($datosUsuario['id_Rol'] == '1'){

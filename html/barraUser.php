@@ -50,7 +50,7 @@ session_start();
             </ul>
         </div>
         <div>
-        <img src="../img/hacker.png" width = "35 px" alt="imagen"/>
+        <img src="<?=(($_SESSION["Foto"]!=="")?"../img/fotos/".$_SESSION["Foto"]:"../img/fotos/users.png");?>" width = "35 px" alt="imagen"/>
         <?=$_SESSION['nombUsuario'];?>
         </div>
     </div>
