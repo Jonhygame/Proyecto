@@ -25,9 +25,12 @@ class Users extends baseDatos{
                     $extension = $extension[count($extension)-1];
                     $nomFinal = $_SESSION['id_Usuario'].".".$extension;
                     move_uploaded_file($_FILES['Foto']['tmp_name'],$rutaImagen.$nomFinal);
-                    $cad = "UPDATE usuario set Foto = '".$nomFinal."', Nombre='".$_POST['nombres']."', Apellido='".$_post['apellidos']."', Pwd=PASSWORD('".$POST['pwd']."'), Genero='".(($_POST['Genero']=="F")?"Femenino":(($_POST['Genero']=="M")?"Masculino":"Otro"))."' where id_Usuario = ".$_SESSION['id_Usuario'];
+                    $cad = "UPDATE usuario set Foto = '".$nomFinal."', Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Pwd=PASSWORD('".$_POST['pwd']."'), Genero='".(($_POST['Genero']=="F")?"Femenino":(($_POST['Genero']=="M")?"Masculino":"Otro"))."' where id_Usuario = ".$_SESSION['id_Usuario'];
                     $this->m_query($cad);
-                }
+                    }else{
+                        $cad = "UPDATE usuario set Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Pwd=PASSWORD('".$_POST['pwd']."'), Genero='".(($_POST['Genero']=="F")?"Femenino":(($_POST['Genero']=="M")?"Masculino":"Otro"))."' where id_Usuario = ".$_SESSION['id_Usuario'];
+                        $this->m_query($cad);
+                    }
                 }
             break;
             case 'delete':
@@ -171,14 +174,14 @@ class Users extends baseDatos{
                                     <div class="form-group">
                                     <div class="input-group mb-3">
                                     <span class="input-group-text">Nombre</span>
-                                    <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value="'.((isset($registro))? $registro["Nombre"] :"").'">
+                                    <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value="'.((isset($registro))?$registro["Nombre"]:"").'">
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                     <div class="input-group mb-3">
                                     <span class="input-group-text">Apellidos</span>
-                                    <input type="text" class="form-control" name="apellidos" placeholder="Apellido del usuario" value="'.((isset($registro))?$registro['Apellido']:"").'">
+                                    <input type="text" class="form-control" name="apellidos" placeholder="Apellido del usuario" value="'.((isset($registro))?$registro["Apellido"]:"").'">
                                     </div>
                             </div>
                             <div class="form-group">
