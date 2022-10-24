@@ -1,5 +1,6 @@
 <?php
 session_start();
+$rutaImagen = "../img/fotos/";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,7 +51,7 @@ session_start();
             </ul>
         </div>
         <div>
-        <img src="<?=(($_SESSION["Foto"]!=="")?"../img/fotos/".$_SESSION["Foto"]:"../img/fotos/users.png");?>" width = "35 px" alt="imagen"/>
+        <img src="<?(($registro["Foto"]!=="")?$rutaImagen.$registro["Foto"]:$rutaImagen."user.png")?>" width = "35 px" alt="imagen"/>
         <?=$_SESSION['nombUsuario'];?>
         </div>
     </div>
