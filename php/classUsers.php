@@ -32,6 +32,7 @@ class Users extends baseDatos{
                         $this->m_query($cad);
                     }
                 }
+                $html=$this->viewProfile();
             break;
             case 'delete':
                 $this->m_query("DELETE from usuario where id_Usuario =".$_POST['id_Usuario']);
@@ -152,12 +153,22 @@ class Users extends baseDatos{
                 $html = $this->listar();
             break;
             case 'viewProfile':
+                $html = $this->viewProfile();
+            break;
+            default:
+                $html.= $_REQUEST['accion']." Accion no programada";
+            break;
+        }
+        return $html;
+    }
+    function viewProfile(){
+                $rutaImagen = "../img/fotos/";
                 $registro = $this->m_obtenerRegistro("SELECT * from usuario where id_Usuario =".$_SESSION['id_Usuario']);
-                $html.='<div class="container">
+                $res = '<div class="container">
                 <form method="post" enctype="multipart/form-data">';
                 if (isset($registro))
-                $html.='<input type="hidden" name="id_Usuario" value="'.$_SESSION['id_Usuario'].'" />';
-                $html.='<div class="row">
+                $res.='<input type="hidden" name="id_Usuario" value="'.$_SESSION['id_Usuario'].'" />';
+                $res.='<div class="row">
                 <div class="col-4">
                     </div>
                         <div class="col-4">
@@ -228,13 +239,7 @@ class Users extends baseDatos{
                 </div>
                 </form>
                 </div>';
-                break;
-            break;
-            default:
-                $html.= $_REQUEST['accion']." Accion no programada";
-            break;
-        }
-        return $html;
+                return $res;
     }
     function listar(){
         $res = '<div class="container"><div class="row"><table border="1" class="table table-hover">';
@@ -245,7 +250,7 @@ class Users extends baseDatos{
         <input type="hidden" name="accion" value="newForm">
         <input type="image" width = "35 px" src="../img/agregar.png">
         </form>
-        </td><th>Id</th><td/>Nombre Completo<td>Email</td><td>Fecha de ultimo acceso</td><td>Accesos</td><td>Genero</td><td>Rol</td>
+        </td><th>Id</th><td/>Nombre Completo<td>Email</td><td>Fecha de ultimo acceso</td><td>Accesos</td><td>Genero</td><td>Rol</td><td>Foto</td>
         </tr>';
         //Fin de cabezera
         $this->m_query("SELECT * from usuario order by id_usuario");
@@ -273,6 +278,7 @@ class Users extends baseDatos{
             <td>'.$tupla['Accesos'].'</td>
             <td>'.$tupla['Genero'].'</td>
             <td>'.(($tupla['id_Rol']=='1')?"Administrador":"Usuario").'</td>
+            <td><img src="../img/fotos/'.$tupla['Foto'].'" height="36px"/></td>
             </tr>';
         }
         return $res.'</table></div></div>';

@@ -95,7 +95,7 @@ class Servicios extends baseDatos{
         <input type="image" width = "35 px" src="../img/agregar.png">
         </form>
         </td>
-        <th>Id</th><td/>Nombre Servicio<td>Precio</td><td>Descripcion</td>
+        <th>Id</th><td/>Nombre Servicio<td>Precio</td><td>Descripcion</td><td>Imagen</td>
         </tr>';
         //Fin de cabezera
         $this->m_query("SELECT * from servicios");
