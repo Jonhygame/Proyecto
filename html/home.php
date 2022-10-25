@@ -22,6 +22,40 @@ include "../html/barra.php";
        </tr>
   </tbody>
 </table>
-  </div>
+</div>
+<form action="">
+  <span id="texto1" onclick="">Simple etiqueta</span>
+  <input type="text" id="valorA">
+  <input type="text" id="valorB">
+  <select id="operador" onChange="">
+    <option value="suma">Suma</option>
+    <option value="resta">Resta</option>
+    <option value="multiplicacion">Multiplicacion</option>
+    <option value="division">Division</option>
+    <option value="vAleatorio">Aleatorio</option>
+    <option value="seno">seno</option>
+  </select>
+<button type="button" onClick="calcular()">Calcular</button>
+</form>
 </div>
 </div>
+
+<script>
+function calcular(){
+  switch (){
+
+    case '+':
+      alert(x);
+    break;
+    case '-':
+
+    break;
+    case '*':
+
+    break;
+    case '/':
+
+    break;
+  }
+}
+</script>
