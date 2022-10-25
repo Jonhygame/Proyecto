@@ -12,7 +12,7 @@ class Users extends baseDatos{
                 $html = $this->listar();
             break;
             case 'update':
-                $cad = "UPDATE usuario SET Nombre = '".$_POST['nombres']."', Apellido='".($_POST['apellidos'])."', Email,'".$_POST['correo']."', Pwd = PASSWORD('".$_POST['pwd']."'), id_Rol='".$_POST[ 'Rol']."' where id_Usuario = ".$_POST['id_Usuario'];
+                $cad = "UPDATE usuario SET Nombre = '".$_POST['nombres']."', Apellido='".($_POST['apellidos'])."', Email='".$_POST['correo']."', Pwd = PASSWORD('".$_POST['pwd']."'), id_Rol='".$_POST[ 'Rol']."' where id_Usuario = ".$_POST['id_Usuario'].";";
                 $this->m_query($cad);
                 $html=$this->listar();
             break;
@@ -27,6 +27,7 @@ class Users extends baseDatos{
                     move_uploaded_file($_FILES['Foto']['tmp_name'],$rutaImagen.$nomFinal);
                     $cad = "UPDATE usuario set Foto = '".$nomFinal."', Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Pwd=PASSWORD('".$_POST['pwd']."'), Genero='".(($_POST['Genero']=="F")?"Femenino":(($_POST['Genero']=="M")?"Masculino":"Otro"))."' where id_Usuario = ".$_SESSION['id_Usuario'];
                     $this->m_query($cad);
+                    $_SESSION['Foto'] = $rutaImagen.$nomFinal;
                     }else{
                         $cad = "UPDATE usuario set Nombre='".$_POST['nombres']."', Apellido='".$_POST['apellidos']."', Pwd=PASSWORD('".$_POST['pwd']."'), Genero='".(($_POST['Genero']=="F")?"Femenino":(($_POST['Genero']=="M")?"Masculino":"Otro"))."' where id_Usuario = ".$_SESSION['id_Usuario'];
                         $this->m_query($cad);
@@ -278,7 +279,7 @@ class Users extends baseDatos{
             <td>'.$tupla['Accesos'].'</td>
             <td>'.$tupla['Genero'].'</td>
             <td>'.(($tupla['id_Rol']=='1')?"Administrador":"Usuario").'</td>
-            <td><img src="../img/fotos/'.$tupla['Foto'].'" height="36px"/></td>
+            <td><img src="../img/fotos/'.(($tupla['Foto']!=="")?$tupla['Foto']:"user.png").'" height="36px"/></td>
             </tr>';
         }
         return $res.'</table></div></div>';
