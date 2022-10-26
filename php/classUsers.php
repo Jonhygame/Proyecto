@@ -4,6 +4,7 @@ include "../php/classBaseDeDatos.php";
 class Users extends baseDatos{
     function ejecuta($accion){
         $rutaImagen = "../img/fotos/";
+        $nomFinal = "";
         $html = '';
         switch ($accion){
             case 'insert':
