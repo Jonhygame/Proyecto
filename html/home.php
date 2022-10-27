@@ -9,14 +9,9 @@ include "../html/barra.php";
  
   <div class="card-body">
   <table class="table table-hover">
-  <thead>
-    <tr >
-      <th scope="col">Menu principal</th>
-    </tr>
-  </thead>
   <tbody>
       <tr class="table-secondary">
-      <th scope="row" >
+      <th scope="row">
        No eres usuario xD
         </th>
        </tr>
