@@ -51,7 +51,7 @@ $rutaImagen = "../img/fotos/";
             </ul>
         </div>
         <div>
-        <img src="<?if($_SESSION['Foto']!==""){echo $rutaImagen.$_SESSION["Foto"];}else{echo $rutaImagen."user.png";} ?>" width = "35 px" alt="imagen"/>
+        <img src="<?echo $rutaImagen;if($_SESSION['Foto']!==""){echo $_SESSION["Foto"];}else{echo "user.png";} ?>" width = "35 px" alt="imagen"/>
         <?=$_SESSION['nombUsuario'];?>
         </div>
     </div>
