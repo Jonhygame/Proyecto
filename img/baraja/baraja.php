@@ -52,10 +52,10 @@ function finMovimiento(event)
 <?
 $letras_permitidas = "CDPT";
 $i=1;
-$numeros="0123456789";
 	for ($i = 1; $i <= 15; $i++) {
+		$a = rand(1,9);
 		echo'<div id="div'.$i.'" style="top: 200px; left: '.(180+$i*80).'px; width: 112px; height: 158px; position: absolute; background-color: black; cursor: move; " onmousedown="comienzoMovimiento(event, this.id);" onmouseover="this.style.cursor=&#39;move&#39;">
-		<img src="'.$i.substr(str_shuffle($letras_permitidas),0,1).'.jpg">
+		<img src="'.$a.substr(str_shuffle($letras_permitidas),0,1).'.jpg">
 		<input type="checkbox"/>
 		</div>';
 	}
