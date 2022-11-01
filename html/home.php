@@ -81,7 +81,7 @@ include "../html/barra.php";
   </form>
 </div>
 <div style="border-color: gray; border-width: 3px; border-style: dotted; height:600px; " id="capa2">
-  <div id="capa" style="width:510px; top:0%; position:sticky; left:0% " >
+  <div id="capa" style="width:510px; top:15%; position:sticky; left:5% " >
     <img src="../img/hacker.png" alt="Hacker" id="img" width="100%" >
   </div>
 </div>
