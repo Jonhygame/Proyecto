@@ -11,6 +11,7 @@ $rutaImagen = "../img/fotos/";
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
+    <script src="../js/bootstrap.bundle.min.js"></script>
     <title>Proyecto</title>
 </head>
 <body>
