@@ -4,18 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="initial-scale=1.0" />
-    <title>Document</title>
+    <title>Practica modelo Vista controlador</title>
     <script src="operaciones.js"></script>
     <script src="../js/jquery.js"></script>
   </head>
   <body>
-    <form action="">
+    <form id="formulario">
       <label for="">Dato A <input type="text" name="datoA" /></label><br />
       <label for="">Dato B <input type="text" name="datoB" /></label><br />
       <input
         type="button"
         value="Sumar"
-        onclick="operacioness('suma',datoA.value,datoB.value)"
+        onclick="operacioness('Sumar',datoA.value,datoB.value)"
       />
       <input
         type="button"
@@ -39,6 +39,7 @@
         height: 200px;
         border-color: black;
         border-style: solid;
+        width: 400px;
       "
     ></div>
   </body>

@@ -1,16 +1,20 @@
 function operacioness(cual, para1, para2, para3) {
   switch (cual) {
-    case "suma":
+    case "Sumar":
       $.ajax({
         type: "POST",
         url: "operaciones.php",
         data: {
-          accion: cual,
-          datoA: para1,
-          datoB: para2,
+          "accion" : cual,
+          "datoA" : para1,
+          "datoB" : para2,
         },
-        beforeSend: function () {},
-        success: function (resulTPHP) {},
+        beforeSend: function (){
+          resultados.innerHTML = "Procesando...................";
+        },
+        success: function (result) {
+          resultados.innerHTML = result;
+        }
         //error: function (resultPHP) {},
       });
       break;
@@ -18,7 +22,7 @@ function operacioness(cual, para1, para2, para3) {
       alert("Los números son: " + para1 + " y " + para2);
     default:
       alert(cual + " No esta programada");
-      break;
+    break;
   }
   /*var operacion = document.getElementById("operacion").value;
   var num1 = document.getElementById("num1").value;
