@@ -17,9 +17,10 @@ function operacioness(cual, para1, para2, para3) {
         }
         //error: function (resultPHP) {},
       });
-      break;
+    break;
     case "mostNumeros":
       alert("Los números son: " + para1 + " y " + para2);
+    break;
     default:
       alert(cual + " No esta programada");
     break;
@@ -38,4 +39,11 @@ function operacioness(cual, para1, para2, para3) {
   } else if (operacion == "division") {
     resultado.value = parseInt(num1) / parseInt(num2);
   }*/
+}
+
+function dow(){
+  $.alert({
+    title: 'Alert!',
+    content: 'Simple alert!',
+});
 }
