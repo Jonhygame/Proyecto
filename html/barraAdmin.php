@@ -43,6 +43,11 @@ if(!isset($_SESSION['email'])){
                 </a>
               </li>
               <li class="nav-item">
+                <a class="nav-link active" href="../vistas/promocion.php">Promocion
+                  <span class="visually-hidden">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="../html/login.php">Sesion</a>
               </li>
               <li class="nav-item">

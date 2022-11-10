@@ -42,8 +42,24 @@ function operacioness(cual, para1, para2, para3) {
 }
 
 function dow(){
-  $.alert({
-    title: 'Alert!',
-    content: 'Simple alert!',
-});
+  $.confirm({
+    title: 'Confirm!',
+    content: 'Simple confirm!',
+    buttons: {
+        confirm: function () {
+            $.alert('Confirmed!');
+        },
+        cancel: function () {
+            $.alert('Canceled!');
+        },
+        somethingElse: {
+            text: 'Something else',
+            btnClass: 'btn-blue',
+            keys: ['enter', 'shift'],
+            action: function(){
+                $.alert('Something else?');
+            }
+        }
+    }
+  });
 }
