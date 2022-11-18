@@ -6,62 +6,74 @@ class Servicios extends baseDatos{
         $html = '';
         switch ($accion){
             case 'insert':
-                $cad="INSERT INTO servicios set id_Usuario='".$_SESSION['id_Usuario']."'";
+                if ($_FILES['img']['name']!=="") {
+                    $tipoArch = $_FILES['img']['type'];
+                    $ImgSubida = fopen($_FILES['img']['tmp_name'],'r');
+                    $sizeImg = $_FILES['img']['size'];
+                    $binarioImg = fread($ImgSubida,$sizeImg);
+                    $binarioImg = addslashes($binarioImg);
+                    $cad="INSERT INTO servicios SET Nombre ='".$_POST['nombre']."', Precio='".$_POST['precio']."', Descripcion='".$_POST['desc']."', Imagen='".$binarioImg."', type='".$tipoArch."'";
+                }else{
+                    $cad="INSERT INTO servicios SET Nombre ='".$_POST['nombre']."', Precio='".$_POST['precio']."', Descripcion='".$_POST['desc']."'";
+                }
                 $this->m_query($cad);
                 $html = $this->listar();
             break;
             case 'update':
-                $cad = "UPDATE usuario SET Nombre = '".$_POST['usuario']."' where id_Usuario = ".$_POST['id_Usuario'];
+                if ($_FILES['img']['name']!=="") {
+                    $tipoArch = $_FILES['img']['type'];
+                    $ImgSubida = fopen($_FILES['img']['tmp_name'],'r');
+                    $sizeImg = $_FILES['img']['size'];
+                    $binarioImg = fread($ImgSubida,$sizeImg);
+                    $binarioImg = addslashes($binarioImg);
+                    $cad = "UPDATE servicios SET Nombre ='".$_POST['nombre']."', Precio='".$_POST['precio']."', Descripcion='".$_POST['desc']."', Imagen='".$binarioImg."', type='".$tipoArch."' where id_Servicio=".$_POST['id_Servicio'];
+                }else{
+                $cad = "UPDATE servicios SET Nombre ='".$_POST['nombre']."', Precio='".$_POST['precio']."', Descripcion='".$_POST['desc']."' where id_Servicio=".$_POST['id_Servicio'];
+                }
                 $this->m_query($cad);
                 $html=$this->listar();
             break;
             case 'delete':
-                $this->m_query("DELETE from usuario where id_Usuario =".$_POST['id_Usuario']);
+                $this->m_query("DELETE from servicios where id_Servicio =".$_POST['id_Servicio']);
                 $html = $this->listar();
                 break;
             case 'editForm':
-                $registro = $this->m_obtenerRegistro("SELECT * from usuario where id_Usuario =".$_POST['id_Usuario']);
+                $registro = $this->m_obtenerRegistro("SELECT * from servicios where id_Servicio =".$_POST['id_Servicio']);
             case 'newForm':
                 $html.='<div class="container">
-                <form method="post">';
+                <form method="post" enctype="multipart/form-data">';
                 if (isset($registro))
-                $html.='<input type="hidden" name="id_Usuario" value="'.$_POST['id_Usuario'].'" />';
+                $html.='<input type="hidden" name="id_Servicio" value="'.$_POST['id_Servicio'].'" />';
                 $html.='<div class="row">
                 <div class="col-4"></div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label class="form-label mt-4">Nuevo Usuario</label>
+                            <label class="form-label mt-4">'.(isset($registro)?"Servicio":"Nuevo Servicio").'</label>
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                    <span class="input-group-text">Nombre</span>
-                                    <input type="text" class="form-control" name="nombres" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Nombre"] :"").'>
+                                    <input type="file" accept=".jpg,.png,.jpeg,.gif" class="form-control" name="img" placeholder="Imagen" value="">
+                                    <img src="'.(isset($registro)?"data:".$registro['type'].";base64,".base64_encode($registro['Imagen']):"").'" alt="" height = "36 px" class="Foto"/>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                     <div class="input-group mb-3">
-                                    <span class="input-group-text">Apellidos</span>
-                                    <input type="text" class="form-control" name="apellidos" placeholder="Apellido del usuario" value="'.((isset($registro))?$registro['Apellido']:"").'">
+                                    <span class="input-group-text">Nombre</span>
+                                    <input type="text" class="form-control" name="nombre" placeholder="Nombre del Servicio" value="'.((isset($registro))?$registro['Nombre']:"").'">
+                                    </div>
+                            </div>
+                            <div class="form-group">
+                                    <div class=" mb-3">
+                                    <span class="input-group-text">Descripcion</span>
+                                    <input type="text" class="form-control" name="desc" placeholder="Pequeña descripcion de el servicio" value="'.((isset($registro))?$registro['Descripcion']:"").'">
                                     </div>
                             </div>
                             <div class="form-group">
                                     <div class="input-group mb-3">
-                                    <span class="input-group-text">Email</span>
-                                    <input type="text" class="form-control" name="correo" placeholder="Email" value="'.((isset($registro))?$registro['Email']:"").'">
+                                    <span class="input-group-text">Precio</span>
+                                    <input type="text" class="form-control" name="precio" placeholder="Precio del servicio" value="'.((isset($registro))?$registro['Precio']:"").'">
                                     </div>
                             </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Password</span>
-                                    <input type="text" class="form-control" name="pwd" placeholder="Contraseña" value="">
-                                    </div>
-                            </div>
-                            <div class="form-group">
-                                    <div class="input-group mb-3">
-                                    <span class="input-group-text">Fecha del ultimo acceso</span>
-                                    <input type="date" class="form-control" name="Fecha_Ulti_Acceso" placeholder="Fecha del ultimo acceso" value="'.((isset($registro))?$registro['Fecha_ulti_acceso']:"").'">
-                                    </div>
-                            </div>'.((isset($registro))?"":"").'
                         </div>
                     </div>
                 <div class="row">
@@ -120,7 +132,7 @@ class Servicios extends baseDatos{
             <td>'.$tupla["Nombre"].'</td>
             <td>'.$tupla['Precio'].'</td>
             <td>'.$tupla['Descripcion'].'</td>
-            <td>'.$tupla['Imagen'].'</td>
+            <td><img src="'.(isset($tupla)?"data:".$tupla['type'].";base64,".base64_encode($tupla['Imagen']):"").'" alt="" height = "36 px" class="Foto"/></td>
             </tr>';
         }
         return $res.'</table></div></div>';

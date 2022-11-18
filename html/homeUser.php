@@ -57,9 +57,9 @@ include "../php/classServicios.php";
 $oServicios->m_Query("Select * from servicios Order by Nombre;");
 foreach($oServicios->a_registros as $registro){
 ?>
-	
 		<div class="col-md-3">
 			<div class="card">
+				<?="<img src=data:".$registro['type'].";base64,".base64_encode($registro['Imagen'])." class='Foto' alt='Imagen'>"?>
 				<h5 class="card-header">
 					<?=$registro['Nombre']?>
 				</h5>

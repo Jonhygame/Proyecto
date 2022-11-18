@@ -34,16 +34,6 @@ $rutaImagen = "../img/fotos/";
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="../vistas/perfil.php">Usuarios
-                  <span class="visually-hidden">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="../vistas/perfil.php">Usuarios
-                  <span class="visually-hidden">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a class="nav-link" href="../html/login.php">Sesion</a>
               </li>
               <li class="nav-item">

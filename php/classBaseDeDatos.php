@@ -53,14 +53,16 @@ class baseDatos {
     function m_recuRegistro(){
         return mysqli_fetch_array($this->a_registros);
     }
-    function m_crearLista($tabla,$PK,$nombCampo,$ordenarPor){
+    function m_crearLista($tabla,$PK,$nombCampo,$ordenarPor,$seleccionado=-1){
+        
         $cad = "Select ".$PK.", ".$ordenarPor." from ".$tabla." order by ".$ordenarPor;"";
         $this->m_query($cad);
-        $result .= '<select class="form-control" name="'.$nombCampo.'">';
-        foreach ($this->a_registros as $registro ) {
-            $result .= '<option value="'.$value[$PK].'">'.$value[$nombCampo].'</option>';
-            $result .= '</select>';
+        $result = '<select class="form-control" name="'.$nombCampo.'">';
+        foreach ($this->a_registros as $row ) {
+            $result .= '<option name"servicio" value="'.$row[$PK].'">'.$row[$nombCampo].'</option>';
+            //$result.='<input type="hidden" name="id_Servicio" value="'.$row[$PK].'" />';
         }
+        $result .= '</select>';
         return $result;
     }
 }

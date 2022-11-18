@@ -51,7 +51,7 @@ class Users extends baseDatos{
                 <div class="col-4"></div>
                     <div class="col-4">
                         <div class="form-group">
-                            <label class="form-label mt-4">Nuevo Usuario</label>
+                            <label class="form-label mt-4">'.(isset($registro)?"Usuario":"Nuevo Usuario").'</label>
                                 <div class="form-group">
                                     <div class="input-group mb-3">
                                     <span class="input-group-text">Nombre</span>
@@ -176,9 +176,9 @@ class Users extends baseDatos{
                         <div class="col-4">
                         <div class="form-group">
                                 <label class="form-label mt-4">Editar Perfil</label>
-                                    <div class="form-group">
+                                <div class="form-group">
                                     <div class="input-group mb-3">
-                                    <input type="file" accept=".jpg,.png,.jpeg,.gif " class="form-control" name="Foto" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Foto"] :"").'>
+                                        <input type="file" accept=".jpg,.png,.jpeg,.gif " class="form-control" name="Foto" placeholder="Nombre del Usuario" value='.((isset($registro))? $registro["Foto"] :"").'>
                                     <img src="'.(($registro["Foto"]!=="")?$rutaImagen.$registro["Foto"]:$rutaImagen."user.png").'" alt="" height = "36 px" class="Foto"/>
                                     </div>
                                 </div>
