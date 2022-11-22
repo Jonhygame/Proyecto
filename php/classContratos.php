@@ -6,16 +6,17 @@ class Contratos extends baseDatos{
         $html = '';
         switch ($accion){
             case 'insert':
-                $cad="INSERT INTO contrato set Estatus='Pend',Fecha=".date("Y-m-d").",id_Servicio=".$_POST['Nombre'].",id_Usuario=".$_SESSION['id_Usuario'];
+                $cad="INSERT INTO contrato set Estatus='Pend',Fecha=now(),id_Servicio=".$_POST['Nombre'].",id_Usuario=".$_SESSION['id_Usuario'];
                 $this->m_query($cad);
-                $html = $this->ejecuta("newForm");
+                $html = $this->list();
             break;
             case 'update':
                 $cad = "UPDATE contrato SET Nombre = '".$_POST['usuario']."' where id_Usuario = ".$_POST['id_Usuario'];
                 $this->m_query($cad);
             break;
             case 'delete':
-                $this->m_query("DELETE from contrato where id_Usuario =".$_POST['id_Usuario']);
+                $this->m_query("DELETE from contrato where id_Usuario =".$_SESSION['id_Usuario']." and id_Servicio=".$_POST['id_Servicio']." and id_Contrato=".$_POST['id_Contrato']);
+                $html = $this->list();
                 break;
             case 'editForm':
                 $registro = $this->m_obtenerRegistro("SELECT * from contrato where id_Usuario =".$_POST['id_Usuario']);
@@ -43,9 +44,9 @@ class Contratos extends baseDatos{
                 </form>
                 </div>';
                 break;
-            case 'userList':
+            case 'list':
                 echo '<h4>Servicios contratados</h4>';
-                $html = $this->userList();
+                $html = $this->list();
                 break;
             default:
                 $html.= $_REQUEST['accion']." Accion no programada";
@@ -53,7 +54,7 @@ class Contratos extends baseDatos{
         }
         return $html;
     }
-    function userList(){
+    function list(){
         $res = '<div class="container"><div class="row"><table border="1" class="table table-hover">';
         //Cabecera
         $res.= '<tr>

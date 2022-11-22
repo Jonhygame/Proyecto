@@ -132,8 +132,8 @@ class Servicios extends baseDatos{
             <td>'.$tupla["Nombre"].'</td>
             <td>'.$tupla['Precio'].'</td>
             <td>'.$tupla['Descripcion'].'</td>
-            <td><img src="'.(isset($tupla)?"data:".$tupla['type'].";base64,".base64_encode($tupla['Imagen']):"").'" alt="" height = "36 px" class="Foto"/></td>
-            </tr>';
+            <td><img src="'.(isset($tupla)?"data:".$tupla['type'].";base64,".base64_encode($tupla['Imagen']):"").'" alt="" height = "36 px" class="Foto/">
+            </td></tr>';
         }
         return $res.'</table></div></div>';
     }
