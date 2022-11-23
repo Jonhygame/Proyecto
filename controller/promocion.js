@@ -1,10 +1,7 @@
-/** @format */
-
-function promosion(cual, para1, para2, para3) {
+function promocion(cual, para1, para2, para3) {
   switch (cual) {
-    case value:
-      break;
-
+    case "valu":
+    break;
     default:
       $.alert({
         title: "Atencion!",

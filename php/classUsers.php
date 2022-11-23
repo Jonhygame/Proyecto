@@ -19,7 +19,11 @@ class Users extends baseDatos{
             break;
             case 'updateProfile':
                 if($_POST['pwd']==""){
+                    echo '<div class="conntainer">
+                    <div class="alert alert-danger" role="alert">
+                    <div class="col-4">';
                     echo "Escribe tu contraseña porque si no no se puede actualizar";
+                    echo'</div></div></div>';
                 }else{
                     if($_FILES['Foto']['name'] != ''){
                     $extension = explode(".",$_FILES['Foto']['name']);
