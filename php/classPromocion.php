@@ -64,8 +64,8 @@ class Promocion extends baseDatos{
         $res = '<div class="container"><div class="row"><table border="1" class="table table-hover">';
         //Cabecera
         $res.= '<tr>
-        <td colspan="2" scope="row">
-        <img type="image" width = "35 px" src="../img/agregar.png" onClick="promocion(\'newForm\')">
+        <td colspan="2">
+        <img scope="row" type="image" width = "35 px" src="../img/agregar.png" onClick="promocion(\'newForm\')">
         </td><th>Id</th><td/>Nombre</th></tr>';
         //Fin de cabezera
         $this->m_query("SELECT * from Promocion");

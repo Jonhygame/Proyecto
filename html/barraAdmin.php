@@ -18,11 +18,10 @@ if(!isset($_SESSION['email'])){
     <link rel="stylesheet" href="../css/jquery-confirm.css">
     <link rel="shortcut icon" href="../img/favicon.png" type="image/x-icon">
 
+    <script src="../js/jQuery.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/jquery-confirm.js"></script>
-    <script src="../js/jQuery.js"></script>
     <script src="../controller/promocion.js"></script>
-    
     <title>Proyecto</title>
 </head>
 <body>
