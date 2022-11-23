@@ -1,7 +1,9 @@
 function promocion(cual, para1, para2, para3) {
   switch (cual) {
     case "newForm":
-      $.
+      $.ajax({
+        data:{},
+      });
     break;
     default:
       $.alert({
