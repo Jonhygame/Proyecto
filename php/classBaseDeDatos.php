@@ -59,7 +59,7 @@ class baseDatos {
         $this->m_query($cad);
         $result = '<select class="form-control" name="'.$nombCampo.'">';
         foreach ($this->a_registros as $row ) {
-            $result .= '<option name"servicio" value="'.$row[$PK].'">'.$row[$nombCampo].'</option>';
+            $result .= '<option '.(($row[$PK]==$seleccionado)?"selected":"").' name"servicio" value="'.$row[$PK].'">'.$row[$nombCampo].'</option>';
             //$result.='<input type="hidden" name="id_Servicio" value="'.$row[$PK].'" />';
         }
         $result .= '</select>';

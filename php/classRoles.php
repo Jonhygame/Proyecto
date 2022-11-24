@@ -33,7 +33,7 @@ class Roles extends baseDatos{
                 <div class="form-group">
                 <div class="input-group mb-3">
                 <span class="input-group-text">Rol</span>
-                <input type="text" class="form-control" name="Rol" placeholder="Nombre del rol" value='.((isset($registro))? $registro["Rol"] :"").'>
+                <input type="text" class="form-control" name="Rol" placeholder="Nombre del rol" value="'.((isset($registro))? $registro["Rol"] :"").'">
                 </div>
                 </div>
                 </div>
