@@ -57,9 +57,9 @@ class baseDatos {
         
         $cad = "Select ".$PK.", ".$ordenarPor." from ".$tabla." order by ".$ordenarPor;"";
         $this->m_query($cad);
-        $result = '<select class="form-control" name="'.$nombCampo.'">';
+        $result = '<select id="'.$PK.'" class="form-control" name="'.$PK.'">';
         foreach ($this->a_registros as $row ) {
-            $result .= '<option '.(($row[$PK]==$seleccionado)?"selected":"").' name"servicio" value="'.$row[$PK].'">'.$row[$nombCampo].'</option>';
+            $result .= '<option id="'.$row[$PK].'" '.(($row[$PK]==$seleccionado)?"selected":"").' name"'.$tabla.'" value="'.$row[$PK].'">'.$row[$nombCampo].'</option>';
             //$result.='<input type="hidden" name="id_Servicio" value="'.$row[$PK].'" />';
         }
         $result .= '</select>';

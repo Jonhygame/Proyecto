@@ -1,5 +1,31 @@
 function promocion(cual, para1, para2, para3) {
   switch (cual) {
+    case "delete":
+      $.confirm({
+        title: "Eliminar promoción",
+        content: "¿Está seguro de eliminar esta promoción?",
+        columnClass: "col-md-6 col-md-offset-3",
+        type: "red",
+        buttons: {
+          confirm:function() {
+            $.ajax({
+              data:{id:para1},
+              type:"post",
+              url:"../php/classPromocion.php?accion=delete",
+              beforeSend:function(){
+                principal.innerHTML=".......Espere....... ";
+              },
+              success:function(resu){
+                principal.innerHTML=resu;
+              }
+            });
+          },
+          cancel:function(){
+
+          }
+        }
+      });
+    break;
     case "editForm":
       $.ajax({
         data:{"id_Promocion":para1},
@@ -24,11 +50,11 @@ function promocion(cual, para1, para2, para3) {
       });
     break;
     case "insert":
-      if (NomPromocion.value=="") {
+      if (Nombre.value=="") {
         alerta("Error","El campo Nombre no puede estar vacío.");
         NomPromocion.focus();
       }else{
-        if(PorcPromocion.value==""){
+        if(Porcentaje.value==""){
           alerta("Error","El campo Porcentaje no puede estar vacío.");
           PorcPromocion.focus();
         }else{
@@ -37,11 +63,11 @@ function promocion(cual, para1, para2, para3) {
             type:"post",
             url:"../php/classPromocion.php?accion=insert",
             beforeSend:function(){
-              principal.innerHTML="Espere un momento";
+              principal.innerHTML=".......Espere....... ";
             },
             success:function(resu){
               principal.innerHTML=resu;
-            },
+            }
           });
           ventana.close();
         }

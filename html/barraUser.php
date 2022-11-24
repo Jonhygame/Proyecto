@@ -42,8 +42,8 @@ $rutaImagen = "../img/fotos/";
             </ul>
         </div>
         <div>
-        <img src="<?echo $rutaImagen;if($_SESSION['Foto']!==""){echo $_SESSION["Foto"];}else{echo "user.png";} ?>" width = "35 px" alt="imagen"/>
-        <?=$_SESSION['nombUsuario'];?>
+        <img id="miniFoto" src="<?echo $rutaImagen;if($_SESSION['Foto']!==""){echo $_SESSION["Foto"];}else{echo "user.png";} ?>" width = "35 px" alt="imagen"/>
+        <span id="miniNombre"><?=$_SESSION['nombUsuario'];?></span>
         </div>
     </div>
 </nav>
