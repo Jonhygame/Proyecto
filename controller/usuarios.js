@@ -1,4 +1,4 @@
-function usuario(cual, para1, para2, para3) {
+function promocion(cual, para1, para2, para3) {
   switch (cual) {
     case "delete":
       $.confirm({
@@ -9,11 +9,17 @@ function usuario(cual, para1, para2, para3) {
         buttons: {
           confirm:function() {
             $.ajax({
-              data:{id:para1},
+              data:{"id_Promocion":para1},
               type:"post",
               url:"../php/classPromocion.php?accion=delete",
               beforeSend:function(){
                 principal.innerHTML=".......Espere....... ";
+                $.alert({
+                  title: "Eliminando promoción",
+                  content: "Promocion eliminada",
+                  columnClass: "col-md-6 col-md-offset-3",
+                  type: "red",
+                });
               },
               success:function(resu){
                 principal.innerHTML=resu;
@@ -21,7 +27,6 @@ function usuario(cual, para1, para2, para3) {
             });
           },
           cancel:function(){
-
           }
         }
       });
@@ -62,6 +67,30 @@ function usuario(cual, para1, para2, para3) {
             data:$("#formPromocion").serialize(),
             type:"post",
             url:"../php/classPromocion.php?accion=insert",
+            beforeSend:function(){
+              principal.innerHTML=".......Espere....... ";
+            },
+            success:function(resu){
+              principal.innerHTML=resu;
+            }
+          });
+          ventana.close();
+        }
+      }
+    break;
+    case "update":
+      if (Nombre.value=="") {
+        alerta("Error","El campo Nombre no puede estar vacío.");
+        NomPromocion.focus();
+      }else{
+        if(Porcentaje.value==""){
+          alerta("Error","El campo Porcentaje no puede estar vacío.");
+          PorcPromocion.focus();
+        }else{
+          $.ajax({
+            data:$("#formPromocion").serialize(),
+            type:"post",
+            url:"../php/classPromocion.php?accion=update",
             beforeSend:function(){
               principal.innerHTML=".......Espere....... ";
             },

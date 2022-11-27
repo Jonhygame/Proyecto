@@ -17,12 +17,21 @@ class Promocion extends baseDatos{
                 $html = $this->listar();
             break;
             case 'update':
-                $cad = "UPDATE rol SET Rol = '".$_POST['Rol']."' where id_Rol = ".$_POST['id_Rol'];
+                $cad = "UPDATE promocion SET  ";
+                foreach ($_POST as $key => $value) {
+                    if($key!="accion"){
+                        if ($key!="id_Promocion") {
+                            $cad .= " ". $key."='".$value."', ";
+                        }
+                    }
+                }
+                $cad = substr($cad, 0, -2);
+                $cad .= " WHERE id_Promocion=".$_POST['id_Promocion'];
                 $this->m_query($cad);
-                $html=$this->listar();
+                $html = $this->listar();
             break;
             case 'delete':
-                $this->m_query("DELETE from rol where id_Rol =".$_POST['id_Rol']);
+                $this->m_query("DELETE from promocion where id_Promocion =".$_POST['id_Promocion']);
                 $html = $this->listar();
             break;
             case 'editForm':
@@ -31,14 +40,14 @@ class Promocion extends baseDatos{
                 $html.='<form id="formPromocion" form method="post">
                 <div class="container">';
                 if (isset($registro)) 
-                $html.='<input type="hidden" name="id_Rol" value="'.$_POST['id_Promocion'].'" />';
+                $html.='<input type="hidden" name="id_Promocion" value="'.$_POST['id_Promocion'].'" />';
                 $html.='<div class="row">
                     <div class="">
                         <div class="form-group">
                         <label class="form-label mt-4">'.((isset($registro))?"Rol":"Nuevo Rol").'</label>
                             <div class="form-group">
                                 <div class="input-group mb-3">
-                                    <span class="input-group-text">Rol</span>
+                                    <span class="input-group-text">Promocion</span>
                                     <input id="Nombre" type="text" class="form-control" name="Nombre" placeholder="Nombre de la promocion " value="'.((isset($registro))?$registro["Nombre"]:"").'">
                                 </div>
                                 <div class="input-group mb-3">';
