@@ -62,7 +62,7 @@ function evaluar(lista){
 
 
 <?
-	/*$letras_permitidas = "CDPT";
+/*$letras_permitidas = "CDPT";
 	for ($i = 1; $i <= 15; $i++) {
 		$a = rand(1,9);
 		echo'<div id="div'.$i.'" style="top: 200px; left: '.(180+$i*80).'px; width: 112px; height: 158px; position: absolute; background-color: black; cursor: move; " onmousedown="comienzoMovimiento(event, this.id);" onmouseover="this.style.cursor=&#39;move&#39;">

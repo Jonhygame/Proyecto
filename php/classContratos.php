@@ -6,7 +6,7 @@ class Contratos extends baseDatos{
         $html = '';
         switch ($accion){
             case 'insert':
-                $cad="INSERT INTO contrato set Estatus='Pend',Fecha=now(),id_Servicio=".$_POST['Nombre'].",id_Usuario=".$_SESSION['id_Usuario'];
+                $cad="INSERT INTO contrato set Estatus='Pend',Fecha=now(),id_Servicio=".$_POST['id_Servicio'].",id_Usuario=".$_SESSION['id_Usuario'];
                 $this->m_query($cad);
                 $html = $this->list();
             break;

@@ -29,7 +29,7 @@ $rutaImagen = "../img/fotos/";
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="../vistas/perfil.php">Usuarios
+                <a class="nav-link active" href="../vistas/perfil.php">Perfil
                   <span class="visually-hidden">(current)</span>
                 </a>
               </li>
@@ -42,7 +42,7 @@ $rutaImagen = "../img/fotos/";
             </ul>
         </div>
         <div>
-        <img id="miniFoto" src="<?echo $rutaImagen;if($_SESSION['Foto']!==""){echo $_SESSION["Foto"];}else{echo "user.png";} ?>" width = "35 px" alt="imagen"/>
+        <img id="miniFoto" src="<?echo $rutaImagen;if($_SESSION['Foto']!==""){echo $_SESSION["Foto"];}else{echo "user.png";}echo "?".rand()%10000 ?>" width = "35 px" alt="imagen"/>
         <span id="miniNombre"><?=$_SESSION['nombUsuario'];?></span>
         </div>
     </div>
